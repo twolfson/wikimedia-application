@@ -1,4 +1,6 @@
 # wikimedia-application changelog
+2.2.0 - Added locking for update requests
+
 2.1.0 - Implemented race-condition prone update endpoint
 
 2.0.0 - Moved to JSON responses for all endpoints
