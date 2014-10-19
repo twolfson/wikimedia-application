@@ -10,12 +10,23 @@ At the same time, a lot of editors following the news are scrambling to update t
 Please design and implement a simple server providing this API using an environment of your choice. Please describe which other resources you'd use in production to handle the request rates mentioned, and how you'd interact with those resources.
 
 ## Getting Started
-Install the module with: `npm install wikimedia-application`
+This repository depends on `node>=0.10.0` and `git`.
 
-```js
-var wikimedia_application = require('wikimedia-application');
-wikimedia_application.awesome(); // "awesome"
+```bash
+# Clone repository
+git clone https://github.com/twolfson/wikimedia-application
+cd wikimedia-application
+
+# Install dependencies and devDependencies
+npm install
+
+# Run test suite
+npm test
 ```
+
+Currently, there is no `bin` script to start the server. See `twolfson/twolfson.com` for an example of a similar one:
+
+https://github.com/twolfson/twolfson.com/blob/3.34.1/bin/twolfson.com
 
 ## Planning
 - Build `node` server based on `express`
@@ -30,7 +41,7 @@ wikimedia_application.awesome(); // "awesome"
 - Figure out ideal locking mechanism. I would like to avoid writing to disk but we do need an external service to scale indefinitely.
   - For reference, since this is a single core machine exercise we *could* use disk and have the master process only allow one worker to write at a time.
   - We also have to worry about timing out those locks...
-- For now, use dumb overwriting of files. However, leave note about more advanced diff techniques to handle conflicts (e.g. realtime one that Etherpad uses
+- For now, use dumb overwriting of files. However, leave note about more advanced diff techniques to handle conflicts (e.g. realtime one that Etherpad uses)
 
 ## Documentation
 _(Coming soon)_
