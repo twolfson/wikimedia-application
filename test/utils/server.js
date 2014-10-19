@@ -36,9 +36,9 @@ exports.run = function (configOverride) {
     });
   });
   after(function stopServer (done) {
-    // TOOD: Implement teardown
-    // settings.teardown(function handleSettingsDestroy () {
-      server.destroy(done);
-    // });
+    // Destroy server and setting connections (e.g. redis)
+    server.destroy(function handleStopServer () {
+      settings.destroy(done);
+    });
   });
 };

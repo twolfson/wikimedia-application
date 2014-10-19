@@ -1,5 +1,6 @@
 // Load in dependencies
 var assert = require('assert');
+var async = require('async');
 var _ = require('underscore');
 
 // Load in config
@@ -26,11 +27,23 @@ exports.getSettings = function (env, overrideConfig, cb) {
   // Load in static settings
   var settings = exports.getStatic(env, overrideConfig);
 
-  // TODO: Perform instantiation on a per-environment basis
-  process.nextTick(function mockAsyncActions () {
-    // TODO: Push onto an array of teardown functions
+  // Initialize clients and add on teardown functions
+  var teardownFns = [];
+  var redisSettings = settings.redis;
+  settings.redisClient = redis.createClient(redisSettings.port, redisSettings.hostname);
+  teardownFns.push(function teardownRedis (cb) {
+    // DEV: Intentionally ignore error since this is a teardown
+    settings.redisClient.quit(function ignoreError () {
+      cb();
+    });
+  });
 
-    // TODO: Add in a teardown method that runs the teardown functions
+  // Mock asynchronous behavior until we get an instantiation that requires async
+  process.nextTick(function mockAsync () {
+    // Add in a teardown method that runs the teardown functions
+    settings.destroy = function (cb) {
+      async.parallel(teardownFns, cb);
+    };
 
     // Return the generated settings
     cb(null, settings);
