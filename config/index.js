@@ -3,6 +3,7 @@ var assert = require('assert');
 var _ = require('underscore');
 var async = require('async');
 var redis = require('redis');
+var redisLock = require('redis-lock');
 
 // Load in config
 var config = require('./config');
@@ -32,9 +33,16 @@ exports.getSettings = function (env, overrideConfig, cb) {
   var teardownFns = [];
   var redisSettings = settings.redis;
   settings.redisClient = redis.createClient(redisSettings.port, redisSettings.hostname);
+  settings.redisLock = redisLock(settings.redisClient);
   teardownFns.push(function teardownRedis (cb) {
-    // DEV: Intentionally ignore error since this is a teardown
     settings.redisClient.quit(function ignoreError () {
+      // DEV: Intentionally ignore error since this is a teardown
+
+      // Clean up settings to avoid leaks
+      delete settings.redisClient;
+      delete settings.redisLock;
+
+      // Callback
       cb();
     });
   });
