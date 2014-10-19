@@ -27,3 +27,13 @@ describe('A fetch for an existing article', function () {
     expect(this.body).to.equal('Hello World!\n');
   });
 });
+
+describe('A fetch for a non-existant article', function () {
+  serverUtils.run();
+  httpUtils.save(serverUtils.getUrl('/articles/does-not-exist'));
+
+  it('replies with an error', function () {
+    expect(this.err).to.equal(null);
+    expect(this.res.statusCode).to.equal(500);
+  });
+});

@@ -26,7 +26,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "rm test/data/articles/* 2> /dev/null; mocha"
+    "test": "rm test/data/articles/* 2> /dev/null; NODE_ENV=test mocha"
   },
   "dependencies": {
     "express": "~4.9.8",
