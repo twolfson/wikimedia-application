@@ -4,7 +4,7 @@ var httpUtils = require('request-mocha')(require('request'));
 var serverUtils = require('./utils/server');
 
 // Start our tests
-describe.only('An update to an existing article', function () {
+describe('An update to an existing article', function () {
   serverUtils.run();
   httpUtils.save({
     method: 'PUT',
@@ -32,5 +32,21 @@ describe.only('An update to an existing article', function () {
       expect(this.res.statusCode).to.equal(200);
       expect(JSON.parse(this.body)).to.have.property('content', 'oh hai');
     });
+  });
+});
+
+describe('An update to a non-existant article', function () {
+  serverUtils.run();
+  httpUtils.save({
+    method: 'PUT',
+    json: {
+      content: 'oh hai'
+    },
+    url: serverUtils.getUrl('/articles/does-not-exist')
+  });
+
+  it('replies with an error', function () {
+    expect(this.err).to.equal(null);
+    expect(this.res.statusCode).to.equal(500);
   });
 });
