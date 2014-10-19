@@ -15,7 +15,7 @@ describe('A fetch for an empty yet existing article', function () {
   });
 });
 
-describe.only('A fetch for an existing article', function () {
+describe('A fetch for an existing article', function () {
   serverUtils.run({
     articleDir: __dirname + '/data/articles-full/'
   });
