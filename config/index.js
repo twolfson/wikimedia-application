@@ -1,7 +1,8 @@
 // Load in dependencies
 var assert = require('assert');
-var async = require('async');
 var _ = require('underscore');
+var async = require('async');
+var redis = require('redis');
 
 // Load in config
 var config = require('./config');
