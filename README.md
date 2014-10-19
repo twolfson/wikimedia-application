@@ -43,11 +43,42 @@ https://github.com/twolfson/twolfson.com/blob/3.34.1/bin/twolfson.com
   - We also have to worry about timing out those locks...
 - For now, use dumb overwriting of files. However, leave note about more advanced diff techniques to handle conflicts (e.g. realtime one that Etherpad uses)
 
-## Documentation
-_(Coming soon)_
+## Explanation
+This application is very incomplete from the prompt. Unfortunately, I spent 1 hour setting up the server to my customization (which is test driven and make testing as easy as possible). Here is what is missing:
 
-## Examples
-_(Coming soon)_
+- Add in versioning system to articles. Either via front matter on articles or in a persistent store. Probably the latter since disk is slooooow.
+- Move to common response format for article responses `{revision: numeric-id, content: content}`
+- Add in locking mechanism, probably via Redis, using `errorception/redis-lock` since it is the simplest to setup and I know it is easily testable
+- Add tests for updates
+- Add tests for updates + race conditions
+- Add tests for reads while an update is occuring (moar race conditions)
+- Add authentication/edit auditing
+
+In production, we would:
+
+- Spin up 12 processes on same machine with different ports
+    - The `bin` script should allow for `--port` overriding
+- Place processes behind load balancer like HA proxy
+- If we start to get multiple machines
+    - Move file handling into its own service
+    - Move to multiple Redis' for redundancy in case a machine dies
+- If we can't keep up with requests
+    - Look for alternatives to writing articles to disk because it is slow
+        - Maybe writing to in-memory store and persisting via a task queue
+    - Perf our library although it is quite lean
+
+## Documentation
+### Filesystem
+- `config/` - Contains all different settings for our server
+- `lib/` - Container heart of server
+    - `controllers/` - Functions that handle business logic of requests
+    - `errors/` - Container for error constructors and handlers
+    - `routes.js` - Per-environmeent routes to controller mapping
+    - `wikimedia-application.js` - Wrapper around `express` that binds routes and sets up application
+- `test/` - Container for tests
+    - `data/` - Container for test data
+    - `utils/` - Utilities for testing
+    - `*.js` - Tests for different routes/controllers
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
