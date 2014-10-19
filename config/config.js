@@ -21,7 +21,7 @@ exports.test = {
   articleDir: __dirname + '/../test/data/articles/',
   redis: {
     // TODO: For easier local testing, use a dynamic port to avoid conflicts
-    port: 9002,
+    port: process.env.REDIS_PORT || 9002,
     hostname: '127.0.0.1'
   },
   url: {
