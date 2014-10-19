@@ -21,6 +21,7 @@ wikimedia_application.awesome(); // "awesome"
 - Build `node` server based on `express`
   - `GET /articles` unimplemented
   - `GET /articles/:id`
+  - `GET /articles/:id/:revision` unimplemented
   - `PUT /articles/:id`
   - `POST /articles` unimplemented
   - `DELETE /articles/:id` unimplemented
