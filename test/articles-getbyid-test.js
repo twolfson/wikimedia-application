@@ -4,7 +4,7 @@ var httpUtils = require('request-mocha')(require('request'));
 var serverUtils = require('./utils/server');
 
 // Start our tests
-describe.only('A fetch for an empty yet existing article', function () {
+describe('A fetch for an empty yet existing article', function () {
   serverUtils.run();
   httpUtils.save(serverUtils.getUrl('/articles/Latest_plane_crash'));
 
@@ -15,15 +15,15 @@ describe.only('A fetch for an empty yet existing article', function () {
   });
 });
 
-describe.skip('A fetch for an existing article', function () {
+describe.only('A fetch for an existing article', function () {
   serverUtils.run({
-    articleDir: __dirname + '/../articles-full/'
+    articleDir: __dirname + '/data/articles-full/'
   });
   httpUtils.save(serverUtils.getUrl('/articles/Latest_plane_crash'));
 
   it('replies with the article content', function () {
     expect(this.err).to.equal(null);
     expect(this.res.statusCode).to.equal(200);
-    expect(this.body).to.equal('');
+    expect(this.body).to.equal('Hello World!\n');
   });
 });

@@ -1,5 +1,6 @@
 // Load in dependencies
 var assert = require('assert');
+var _ = require('underscore');
 
 // TODO: When we hit too many variables, break into content-named files
 //   that shallow extend onto each other and warn when a conflict occurs
@@ -28,8 +29,8 @@ exports.getStatic = function (env, overrideConfig) {
   var envConfig = config[env];
   assert(envConfig, 'Configuration for "' + env + '" was not found. Please specify `local`, `test`, or `production`');
 
-  // TODO: Shallow extend on the provided overrides
-  var staticConfig = envConfig;
+  // Shallow extend on the provided overrides
+  var staticConfig = _.extend({}, envConfig, overrideConfig);
 
   // Return a deep clone of the settings to prevent pollution
   // TODO: Deep clone
