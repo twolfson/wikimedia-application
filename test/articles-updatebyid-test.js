@@ -46,6 +46,7 @@ describe('An update to a non-existant article', function () {
   });
 
   it('replies with an error', function () {
+    // TODO: Implement error handler for HttpError since this should be a 404
     expect(this.err).to.equal(null);
     expect(this.res.statusCode).to.equal(500);
   });
