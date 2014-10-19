@@ -1,4 +1,6 @@
 # wikimedia-application changelog
+2.1.0 - Implemented race-condition prone update endpoint
+
 2.0.0 - Moved to JSON responses for all endpoints
 
 1.1.2 - Added documentation for repo and remaining items

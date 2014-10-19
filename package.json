@@ -1,7 +1,7 @@
 {
   "name": "wikimedia-application",
   "description": "Application for Wikimedia software engineer position",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "homepage": "https://github.com/twolfson/wikimedia-application",
   "author": {
     "name": "Todd Wolfson",
