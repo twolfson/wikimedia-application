@@ -1,6 +1,8 @@
 // Load in dependencies
+var fs = require('fs');
 var url = require('url');
 var _ = require('underscore');
+var rimraf = require('rimraf');
 var MiniWiki = require('../../');
 var config = require('../../config');
 
@@ -20,8 +22,13 @@ exports.getUrl = function (_urlObj) {
 };
 
 exports.run = function (configOverride) {
-  // TODO: Implement config override and test config
   var settings, server;
+  before(function cleanupArticles (done) {
+    var articleDir = __dirname + '/../data/articles/';
+    rimraf(articleDir, function handleError () {
+      fs.mkdir(articleDir, done);
+    });
+  });
   before(function startServer (done) {
     config.getSettings('test', configOverride, function handleSettings (err, _settings) {
       // If there was an error, handle it
