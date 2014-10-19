@@ -6,9 +6,14 @@ var assert = require('assert');
 var config = {
   // TODO: For easier local testing, use a dynamic port to avoid conflicts
   test: {
-    protocol: 'http',
-    hostname: 'localhost',
-    port: 3000
+    articleDir: __dirname + '/../../articles/'
+    url: {
+      internal: {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: 3000
+      }
+    }
   }
 };
 
