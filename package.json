@@ -26,7 +26,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "pretest": "./bin/test/start-redis.sh && (rm test/data/articles/* 2> /dev/null || true)",
+    "pretest": "./bin/test/start-redis.sh",
     "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
