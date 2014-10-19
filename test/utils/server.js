@@ -15,7 +15,7 @@ exports.getUrl = function (_urlObj) {
   }
 
   // Return the connected URL
-  var staticConfig = config.getStatic('test');
+  var staticConfig = config.getStatic('test').url.internal;
   return url.format(_.defaults({}, urlObj, staticConfig));
 };
 
