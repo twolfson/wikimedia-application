@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var httpUtils = require('request-mocha')(require('request'));
 var MiniWiki = require('../');
 
+// TODO: Relocate into `/config/index.js`
 var config = {
   // TODO: For easier local testing, use a dynamic port to avoid conflicts
   test: {
