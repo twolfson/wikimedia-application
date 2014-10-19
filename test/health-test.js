@@ -1,6 +1,7 @@
 // Load in dependencies
 var url = require('url');
-var httpUtils = require('request-mocha');
+var expect = require('chai').expect;
+var httpUtils = require('request-mocha')(require('request'));
 var MiniWiki = require('../');
 
 var config = {
@@ -40,7 +41,7 @@ var serverUtils = {
 // Start our tests
 describe('A health check to a mini-wiki server', function () {
   serverUtils.run();
-  httpUtils.request(serverUtils.getUrl('/health'));
+  httpUtils.save(serverUtils.getUrl('/health'));
 
   it('is online and working', function () {
     expect(this.err).to.equal(null);
