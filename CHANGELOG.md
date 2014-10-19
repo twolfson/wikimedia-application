@@ -1,4 +1,6 @@
 # wikimedia-application changelog
+2.0.0 - Moved to JSON responses for all endpoints
+
 1.1.2 - Added documentation for repo and remaining items
 
 1.1.1 - Added test for non-existant article

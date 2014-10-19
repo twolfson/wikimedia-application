@@ -11,6 +11,6 @@ describe('A health check to a mini-wiki server', function () {
   it('is online and working', function () {
     expect(this.err).to.equal(null);
     expect(this.res.statusCode).to.equal(200);
-    expect(this.body).to.equal('OK');
+    expect(JSON.parse(this.body)).to.deep.equal({status: 'OK'});
   });
 });

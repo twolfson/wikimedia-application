@@ -11,7 +11,7 @@ describe('A fetch for an empty yet existing article', function () {
   it('replies with the article content', function () {
     expect(this.err).to.equal(null);
     expect(this.res.statusCode).to.equal(200);
-    expect(this.body).to.equal('');
+    expect(JSON.parse(this.body)).to.deep.equal({content: ''});
   });
 });
 
@@ -24,7 +24,7 @@ describe('A fetch for an existing article', function () {
   it('replies with the article content', function () {
     expect(this.err).to.equal(null);
     expect(this.res.statusCode).to.equal(200);
-    expect(this.body).to.equal('Hello World!\n');
+    expect(JSON.parse(this.body)).to.deep.equal({content: 'Hello World!\n'});
   });
 });
 
