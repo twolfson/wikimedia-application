@@ -1,6 +1,7 @@
 // Load in dependencies
 var url = require('url');
 var _ = require('underscore');
+var config = require('../../config');
 
 // Define common server utilities
 exports.getUrl = function (_urlObj) {
@@ -13,17 +14,30 @@ exports.getUrl = function (_urlObj) {
   }
 
   // Return the connected URL
-  return url.format(_.defaults({}, urlObj, config.test));
+  var staticConfig = config.getStatic('test');
+  return url.format(_.defaults({}, urlObj, staticConfig));
 };
 
 exports.run = function (configOverride) {
   // TODO: Implement config override and test config
-  var server;
+  var settings, server;
   before(function startServer (done) {
-    server = new MiniWiki(config.test);
-    server.listen(done);
+    config.getSettings('test', configOverride, function handleSettings (err, _settings) {
+      // If there was an error, handle it
+      if (err) {
+        return done(err);
+      }
+
+      // Otherwise, save the settings and instantiate our server with them
+      settings = _settings;
+      server = new MiniWiki(settings);
+      server.listen(done);
+    });
   });
   after(function stopServer (done) {
-    server.destroy(done);
+    // TOOD: Implement teardown
+    // settings.teardown(function handleSettingsDestroy () {
+      server.destroy(done);
+    // });
   });
 };

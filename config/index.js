@@ -25,15 +25,17 @@ exports.getStatic = function (env, overrideConfig) {
   return staticConfig;
 };
 
-exports.getSettings = function (env, overrideConfig) {
+exports.getSettings = function (env, overrideConfig, cb) {
   // Load in static settings
   var settings = exports.getStatic(env, overrideConfig);
 
   // TODO: Perform instantiation on a per-environment basis
-  // TODO: Push onto an array of teardown functions
+  process.nextTick(function
+    // TODO: Push onto an array of teardown functions
 
-  // TODO: Add in a teardown method that runs the teardown functions
+    // TODO: Add in a teardown method that runs the teardown functions
 
-  // Return the generated settings
-  return settings;
+    // Return the generated settings
+    cb(null, settings);
+  });
 };
