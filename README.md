@@ -26,6 +26,9 @@ wikimedia_application.awesome(); // "awesome"
   - `DELETE /articles/:id` unimplemented
 - Create `gitignore'd` directory to save HTML files
 - Save URL names to disk with `encodeURIComponent` names
+- Figure out ideal locking mechanism. I would like to avoid writing to disk but we do need an external service to scale indefinitely.
+  - For reference, since this is a single core machine exercise we *could* use disk and have the master process only allow one worker to write at a time.
+  - We also have to worry about timing out those locks...
 - For now, use dumb overwriting of files. However, leave note about more advanced diff techniques to handle conflicts (e.g. realtime one that Etherpad uses
 
 ## Documentation
