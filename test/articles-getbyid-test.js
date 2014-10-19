@@ -4,7 +4,7 @@ var httpUtils = require('request-mocha')(require('request'));
 var serverUtils = require('./utils/server');
 
 // Start our tests
-describe('A fetch for an empty yet existing article', function () {
+describe.only('A fetch for an empty yet existing article', function () {
   serverUtils.run();
   httpUtils.save(serverUtils.getUrl('/articles/Latest_plane_crash'));
 
