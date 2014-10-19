@@ -4,13 +4,16 @@ var assert = require('assert');
 // TODO: When we hit too many variables, break into content-named files
 //   that shallow extend onto each other and warn when a conflict occurs
 var config = {
-  // TODO: For easier local testing, use a dynamic port to avoid conflicts
+  common: {
+    articleDir: __dirname + '/../articles/'
+  },
   test: {
-    articleDir: __dirname + '/../../articles/',
+    articleDir: __dirname + '/../test/data/articles/',
     url: {
       internal: {
         protocol: 'http',
         hostname: 'localhost',
+        // TODO: For easier local testing, use a dynamic port to avoid conflicts
         port: 3000
       }
     }
