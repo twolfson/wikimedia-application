@@ -7,7 +7,7 @@ var serverUtils = require('./utils/server');
 describe.only('An update to an existing article', function () {
   serverUtils.run();
   httpUtils.save({
-    method: 'POST',
+    method: 'PUT',
     form: {
       content: 'oh hai'
     },
