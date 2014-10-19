@@ -1,3 +1,6 @@
+// Load in dependencies
+var assert = require('assert');
+
 // TODO: When we hit too many variables, break into content-named files
 //   that shallow extend onto each other and warn when a conflict occurs
 var config = {
@@ -30,7 +33,7 @@ exports.getSettings = function (env, overrideConfig, cb) {
   var settings = exports.getStatic(env, overrideConfig);
 
   // TODO: Perform instantiation on a per-environment basis
-  process.nextTick(function
+  process.nextTick(function mockAsyncActions () {
     // TODO: Push onto an array of teardown functions
 
     // TODO: Add in a teardown method that runs the teardown functions

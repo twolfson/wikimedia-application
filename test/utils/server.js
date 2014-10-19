@@ -1,6 +1,7 @@
 // Load in dependencies
 var url = require('url');
 var _ = require('underscore');
+var MiniWiki = require('../../');
 var config = require('../../config');
 
 // Define common server utilities
