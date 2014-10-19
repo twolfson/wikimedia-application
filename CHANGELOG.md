@@ -1,4 +1,6 @@
 # wikimedia-application changelog
+1.1.2 - Added documentation for repo and remaining items
+
 1.1.1 - Added test for non-existant article
 
 1.1.0 - Added reading article from disk
