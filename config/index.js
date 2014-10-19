@@ -2,25 +2,10 @@
 var assert = require('assert');
 var _ = require('underscore');
 
-// TODO: When we hit too many variables, break into content-named files
-//   that shallow extend onto each other and warn when a conflict occurs
-var config = {
-  common: {
-    articleDir: __dirname + '/../articles/'
-  },
-  test: {
-    articleDir: __dirname + '/../test/data/articles/',
-    url: {
-      internal: {
-        protocol: 'http',
-        hostname: 'localhost',
-        // TODO: For easier local testing, use a dynamic port to avoid conflicts
-        port: 3000
-      }
-    }
-  }
-};
+// Load in config
+var config = require('./config');
 
+// Define different ways to access config data
 exports.getStatic = function (env, overrideConfig) {
   // If the environment is common, reject it
   assert.notEqual(env, 'common', '"common" is not allowed to be a requested environment. Please choose from `local`, `test`, or `production`');
