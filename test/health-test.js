@@ -1,5 +1,6 @@
 // Load in dependencies
 var url = require('url');
+var _ = require('underscore');
 var expect = require('chai').expect;
 var httpUtils = require('request-mocha')(require('request'));
 var MiniWiki = require('../');
@@ -7,6 +8,7 @@ var MiniWiki = require('../');
 var config = {
   // TODO: For easier local testing, use a dynamic port to avoid conflicts
   test: {
+    protocol: 'http',
     hostname: 'localhost',
     port: 3000
   }
@@ -23,7 +25,7 @@ var serverUtils = {
     }
 
     // Return the connected URL
-    return url.format(urlObj);
+    return url.format(_.defaults({}, urlObj, config.test));
   },
   run: function (configOverride) {
     // TODO: Implement config override and test config
